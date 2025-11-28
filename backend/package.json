@@ -1,0 +1,57 @@
+{
+  "name": "genesix_backend",
+  "version": "1.0.0",
+  "description": "Backend da plataforma GenesiX - Sistema de criação de produtos com IA",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "seed:prod": "node -e \"require('./src/utils/prodSeed').seedProd().then(()=>process.exit(0)).catch(err=>{console.error(err);process.exit(1);})\"",
+    "db:create": "createdb genesix_db",
+    "db:drop": "dropdb genesix_db",
+    "db:reset": "npm run db:drop && npm run db:create",
+    "db:sync": "node -e \"require('./src/models').syncDatabase()\"",
+    "db:sync:force": "node -e \"require('./src/models').syncDatabase(true)\"",
+    "seed": "node src/seeders/index.js",
+    "lint": "echo 'Linting not configured yet'",
+    "format": "echo 'Formatting not configured yet'"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "postgresql",
+    "jwt",
+    "oauth",
+    "api",
+    "backend",
+    "genesix"
+  ],
+  "author": "GenesiX Team",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
+    "ioredis": "^5.8.2",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.1",
+    "passport": "^0.7.0",
+    "passport-github2": "^0.1.12",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-linkedin-oauth2": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.16.3",
+    "rate-limit-redis": "^4.2.0",
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7",
+    "winston": "^3.14.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "sequelize-cli": "^6.6.3"
+  }
+}
