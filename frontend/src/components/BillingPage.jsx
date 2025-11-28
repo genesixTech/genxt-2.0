@@ -29,7 +29,7 @@ const BillingPage = () => {
         const plansResp = await planService.getPlans();
         const plans = plansResp?.data?.plans || plansResp?.data?.data?.plans || [];
         setPlanOptions(plans);
-        const storedId = localStorage.getItem('genesix_subscription_id');
+        const storedId = localStorage.getItem("genesix_subscription_id");
         if (storedId) {
           try {
             const subResp = await planService.getSubscription(storedId);
@@ -52,7 +52,7 @@ const BillingPage = () => {
       const resp = await planService.createSubscription(planId);
       const sub = resp?.data?.subscription || resp?.data?.data?.subscription;
       if (sub?.id) {
-        localStorage.setItem('genesix_subscription_id', sub.id);
+        localStorage.setItem("genesix_subscription_id", sub.id);
         setSubscription(sub);
         notify.success("Plano selecionado");
       }
@@ -94,7 +94,10 @@ const BillingPage = () => {
           </CardHeader>
           <CardContent className="space-y-2">
             {(subscription?.invoices || fallbackInvoices).map((inv) => (
-              <div key={inv.id} className="flex items-center justify-between rounded-xl border border-gray-100 px-4 py-3 bg-white">
+              <div
+                key={inv.id}
+                className="flex items-center justify-between rounded-xl border border-gray-100 px-4 py-3 bg-white"
+              >
                 <div>
                   <p className="text-sm font-semibold text-gray-900">{inv.id}</p>
                   <p className="text-xs text-gray-500">{inv.date}</p>
@@ -115,20 +118,22 @@ const BillingPage = () => {
         <Card className="border-gray-100 shadow-sm">
           <CardHeader>
             <CardTitle className="text-sm">Uso do plano</CardTitle>
-            <CardDescription className="text-xs">Plano atual: {currentPlan?.name || subscription?.plan || 'nao definido'}</CardDescription>
+            <CardDescription className="text-xs">
+              Plano atual: {currentPlan?.name || subscription?.plan || "nao definido"}
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2 text-sm text-gray-700">
             <div className="flex items-center justify-between">
               <span>Status</span>
-              <span className="font-semibold">{subscription?.status || 'ativo'}</span>
+              <span className="font-semibold">{subscription?.status || "ativo"}</span>
             </div>
             <div className="flex items-center justify-between">
               <span>Renovacao</span>
-              <span className="font-semibold">{subscription?.period || 'mensal'}</span>
+              <span className="font-semibold">{subscription?.period || "mensal"}</span>
             </div>
             <div className="flex items-center justify-between">
               <span>Plano</span>
-              <span className="font-semibold">{subscription?.plan || 'team'}</span>
+              <span className="font-semibold">{subscription?.plan || "team"}</span>
             </div>
           </CardContent>
         </Card>
@@ -138,21 +143,25 @@ const BillingPage = () => {
         {planOptions.map((plan) => {
           const isCurrent = plan.id === subscription?.plan;
           return (
-            <div key={plan.id} className={ounded-2xl border p-5 shadow-sm bg-white }>
+            <div key={plan.id} className="rounded-2xl border p-5 shadow-sm bg-white">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="text-lg font-semibold text-gray-900">{plan.name}</h3>
                 <div className="flex items-center gap-2">
                   {isCurrent && (
-                    <span className="text-xs px-2 py-1 rounded-full bg-green-50 text-green-600 font-semibold">Atual</span>
+                    <span className="text-xs px-2 py-1 rounded-full bg-green-50 text-green-600 font-semibold">
+                      Atual
+                    </span>
                   )}
                   {plan.highlight && (
-                    <span className="text-xs px-2 py-1 rounded-full bg-blue-50 text-blue-600 font-semibold">Popular</span>
+                    <span className="text-xs px-2 py-1 rounded-full bg-blue-50 text-blue-600 font-semibold">
+                      Popular
+                    </span>
                   )}
                 </div>
               </div>
               <div className="flex items-baseline gap-1">
-                <span className="text-3xl font-bold text-gray-900">{plan.price ?? 'Custom'}</span>
-                <span className="text-sm text-gray-500">{plan.period || '/mes'}</span>
+                <span className="text-3xl font-bold text-gray-900">{plan.price ?? "Custom"}</span>
+                <span className="text-sm text-gray-500">{plan.period || "/mes"}</span>
               </div>
               <p className="text-sm text-gray-600 mt-1">{plan.description}</p>
               <Button
@@ -162,7 +171,7 @@ const BillingPage = () => {
                 onClick={() => handleSubscribe(plan.id)}
               >
                 {subscribing === plan.id && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
-                {isCurrent ? 'Plano atual' : 'Selecionar'}
+                {isCurrent ? "Plano atual" : "Selecionar"}
               </Button>
               <div className="mt-4 space-y-2">
                 {plan.features?.map((feat) => (
