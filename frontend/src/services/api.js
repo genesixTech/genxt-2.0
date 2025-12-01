@@ -507,6 +507,24 @@ export const planService = {
   },
 };
 
+export const analyticsService = {
+  async getDashboard(period = 30) {
+    return api.get('/analytics/dashboard', { period });
+  },
+  async getProject(projectId) {
+    return api.get(`/analytics/projects/${projectId}`);
+  },
+  async getDocuments(period = 30) {
+    return api.get('/analytics/documents', { period });
+  },
+  async getCollaboration(period = 30) {
+    return api.get('/analytics/collaboration', { period });
+  },
+  async getTimeline(period = 30) {
+    return api.get('/analytics/timeline', { period });
+  },
+};
+
 export const settingsService = {
   // Obter configuraÃƒÂ§ÃƒÂµes
   async getSettings() {
