@@ -1,5 +1,5 @@
 ﻿// ConfiguraÃƒÂ§ÃƒÂ£o base da API
-const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
+const API_BASE_URL = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_URL) || process.env.REACT_APP_API_URL || '/api';
 
 // Classe para gerenciar tokens
 class TokenManager {
@@ -109,7 +109,7 @@ class ApiService {
     if (!refreshToken) {
       this.processQueue(new ApiError('SessÃƒÂ£o expirada', 401));
       TokenManager.clearTokens();
-      window.location.href = '#login';
+      window.location.href = 'login';
       return;
     }
 
@@ -136,7 +136,7 @@ class ApiService {
     } catch (error) {
       this.processQueue(new ApiError('SessÃƒÂ£o expirada', 401));
       TokenManager.clearTokens();
-      window.location.href = '#login';
+      window.location.href = 'login';
       throw error;
     } finally {
       this.isRefreshing = false;
@@ -579,5 +579,7 @@ export const utils = {
 // ExportaÃƒÂ§ÃƒÂµes principais
 export { api, ApiError, TokenManager };
 export default api;
+
+
 
 
