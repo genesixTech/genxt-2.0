@@ -32,12 +32,19 @@ try {
   const canUseRedisStore =
     process.env.REDIS_DISABLED !== '1' &&
     redisClient &&
-    typeof redisClient.call === 'function';
-  limiterStore = canUseRedisStore
-    ? new RedisStore({
-        sendCommand: (...args) => redisClient.call(...args),
-      })
-    : undefined;
+    typeof redisClient.call === 'function' &&
+    redisClient.status === 'ready';
+
+  if (canUseRedisStore) {
+    limiterStore = new RedisStore({
+      sendCommand: (...args) => redisClient.call(...args),
+    });
+  } else {
+    limiterStore = undefined;
+    if (process.env.REDIS_DISABLED !== '1') {
+      logger.warn('Redis rate-limit store indisponivel ou nao conectado, usando memory store');
+    }
+  }
 } catch (err) {
   logger.warn('Redis rate-limit store indisponivel, usando memory store', { err: err.message });
   limiterStore = undefined;
