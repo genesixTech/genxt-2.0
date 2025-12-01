@@ -16,7 +16,7 @@ const { DEV_BYPASS } = require('./middleware/auth');
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.NODE_PORT || process.env.PORT || 3001;
 const FRONTEND_DIST_PATH = path.join(__dirname, '..', 'public');
 const SHOULD_SERVE_FRONTEND = process.env.SERVE_FRONTEND !== 'false';
 

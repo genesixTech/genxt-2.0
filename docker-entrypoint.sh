@@ -2,6 +2,8 @@
 set -euo pipefail
 
 echo "Starting backend (Node.js)..."
+export PORT=3001
+export NODE_PORT=3001
 node src/server.js &
 NODE_PID=$!
 
