@@ -5,7 +5,7 @@ Back: Node/Express, Sequelize, Postgres/Redis (SQLite so em dev explicito).
 Infra opcional: Docker Compose (Postgres, Redis, backend, frontend).
 
 ## Requisitos
-- Node 18+
+- Node 18+ggg
 - npm
 - Para producao: Postgres e Redis
 
@@ -21,7 +21,7 @@ Infra opcional: Docker Compose (Postgres, Redis, backend, frontend).
 2. Rodar: `REACT_APP_API_URL=http://localhost:3001 npm run dev`.
 3. Build: `npm run build`.
 
-## Docker Compose (opcional)
+## Docker Compose (opcional)aaaaa
 `docker-compose up --build` usa:
 - Postgres (porta 5432), Redis (6379)
 - Backend (porta 3001) com env de `backend/.env` e host do DB apontando para `db`
