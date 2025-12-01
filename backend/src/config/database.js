@@ -52,10 +52,10 @@ if (redisDisabled) {
       host: process.env.REDIS_HOST || '127.0.0.1',
       port: process.env.REDIS_PORT || 6379,
       password: process.env.REDIS_PASSWORD || undefined,
-      enableOfflineQueue: false,
-      lazyConnect: true,
-      retryStrategy: () => null,
-      maxRetriesPerRequest: 0,
+      enableOfflineQueue: true,
+      lazyConnect: false,
+      retryStrategy: (times) => Math.min(times * 200, 2000),
+      maxRetriesPerRequest: 1,
     });
     redisClient.on('error', (err) => {
       console.warn('Redis indisponivel, seguindo sem cache:', err.message);
